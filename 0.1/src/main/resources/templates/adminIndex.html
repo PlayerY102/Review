@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!-- Meta information -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+    <!-- Title-->
+    <title>Admin Page</title>
+    <!-- Favicons -->
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="assets/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="assets/ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="assets/ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="assets/ico/apple-touch-icon-57-precomposed.png">
+    <link rel="shortcut icon" href="assets/ico/favicon.ico">
+    <!-- CSS Stylesheet-->
+    <link type="text/css" rel="stylesheet" href="assets/css/bootstrap/bootstrap.min.css"/>
+    <link type="text/css" rel="stylesheet" href="assets/css/bootstrap/bootstrap-themes.css"/>
+    <link type="text/css" rel="stylesheet" href="assets/css/style.css"/>
+</head>
+<body class="leftMenu nav-collapse">
+<div id="wrapper">
+    <!--
+    /////////////////////////////////////////////////////////////////////////
+    //////////     HEADER  CONTENT     ///////////////
+    //////////////////////////////////////////////////////////////////////
+    -->
+    <div id="header">
+
+        <div class="logo-area clearfix">
+            <a href="/admin" class="logo"></a>
+        </div>
+        <!-- //logo-area-->
+
+        <div class="tools-bar">
+            <ul class="nav navbar-nav nav-main-xs">
+                <li><a href="#" class="icon-toolsbar nav-mini"><i class="fa fa-bars"></i></a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right tooltip-area">
+                <li><a href="#" class="avatar-header">
+                    <img alt="" src="assets/img/avatar.png" class="circle">
+                </a>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown">
+                        <em><strong>Hi</strong>,  <strong th:text="${currentAdmin}"></strong></em> <i class="dropdown-icon fa fa-angle-down"></i>
+                    </a>
+                    <ul class="dropdown-menu pull-right icon-right arrow">
+                        <li><a href="#"><i class="fa fa-user"></i> Profile</a></li>
+                        <li><a href="#"><i class="fa fa-cog"></i> Setting </a></li>
+                        <li class="divider"></li>
+                        <li><a href="/adminLogout"><i class="fa fa-sign-out"></i> 登出 </a></li>
+                    </ul>
+                    <!-- //dropdown-menu-->
+                </li>
+            </ul>
+        </div>
+        <!-- //tools-bar-->
+
+    </div>
+    <!-- //header-->
+
+    <!--
+    /////////////////////////////////////////////////////////////////////////
+    //////////     MAIN SHOW CONTENT     //////////
+    //////////////////////////////////////////////////////////////////////
+    -->
+    <div id="main">
+
+        <ol class="breadcrumb">
+            <li><a href="#">Home</a></li>
+        </ol>
+        <!-- //breadcrumb-->
+
+        <div id="content">
+
+
+        </div>
+        <!-- //content-->
+
+    </div>
+    <!-- //main-->
+
+    <!--
+    //////////////////////////////////////////////////////////////
+    //////////     LEFT NAV MENU     //////////
+    ///////////////////////////////////////////////////////////
+    -->
+    <nav id="menu" data-search="close">
+        <ul>
+            <li><span><a href="/admin"><i class="icon  fa fa-laptop"></i> Dashboard</a></span>
+            </li>
+            <li><span><i class="icon  fa fa-rocket"></i>Movie</span>
+                <ul>
+                    <li><a href="/addMovie"><i class="icon  fa fa-rocket"></i>添加电影</a></li>
+                    <li><a href="#"><i class="icon  fa fa-th"></i>TODO</a></li>
+                </ul>
+            </li>
+            <li><span><i class="icon  fa fa-file-text"></i>Book</span>
+                <ul>
+                    <li><a href="/addBook"><i class="icon  fa fa-rocket"></i>添加图书</a></li>
+                    <li><a href="#"><i class="icon  fa fa-th"></i>TODO</a></li>
+                </ul>
+            </li>
+            <li><span><i class="icon  fa fa-clipboard"></i>Topic</span>
+                <ul>
+                    <li><a href="/addTopic"><i class="icon  fa fa-rocket"></i>添加话题</a></li>
+                    <li><a href="#"><i class="icon  fa fa-th"></i>TODO</a></li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
+    <!-- //nav left menu-->
+</div>
+<!-- //wrapper-->
+
+
+<!--
+////////////////////////////////////////////////////////////////////////
+//////////     JAVASCRIPT  LIBRARY     //////////
+/////////////////////////////////////////////////////////////////////
+-->
+<!-- Jquery Library -->
+<script type="text/javascript" src="assets/js/jquery.min.js"></script>
+<script type="text/javascript" src="assets/js/jquery.ui.min.js"></script>
+<script type="text/javascript" src="assets/plugins/bootstrap/bootstrap.min.js"></script>
+<!-- Modernizr Library For HTML5 And CSS3 -->
+<script type="text/javascript" src="assets/js/modernizr/modernizr.js"></script>
+<script type="text/javascript" src="assets/plugins/mmenu/jquery.mmenu.js"></script>
+<script type="text/javascript" src="assets/js/styleswitch.js"></script>
+<!-- Library 10+ Form plugins-->
+<script type="text/javascript" src="assets/plugins/form/form.js"></script>
+<!-- Datetime plugins -->
+<script type="text/javascript" src="assets/plugins/datetime/datetime.js"></script>
+<!-- Library Chart-->
+<script type="text/javascript" src="assets/plugins/chart/chart.js"></script>
+<!-- Library  5+ plugins for bootstrap -->
+<script type="text/javascript" src="assets/plugins/pluginsForBS/pluginsForBS.js"></script>
+<!-- Library 10+ miscellaneous plugins -->
+<script type="text/javascript" src="assets/plugins/miscellaneous/miscellaneous.js"></script>
+<!-- Library Themes Customize-->
+<script type="text/javascript" src="assets/js/caplet.custom.js"></script>
+
+</body>
+</html>

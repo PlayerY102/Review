@@ -1,0 +1,799 @@
+﻿<!DOCTYPE html>
+<!--[if IE 7]>
+<html class="ie ie7 no-js" lang="en-US">
+<![endif]-->
+<!--[if IE 8]>
+<html class="ie ie8 no-js" lang="en-US">
+<![endif]-->
+<!--[if !(IE 7) | !(IE 8)  ]><!-->
+<html lang="en" class="no-js" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<!-- Basic need -->
+	<title>Open Pediatrics</title>
+	<meta charset="UTF-8">
+	<meta name="description" content="">
+	<meta name="keywords" content="">
+	<meta name="author" content="">
+	<link rel="profile" href="#">
+
+    <!--Google Font-->
+    <link rel="stylesheet" href='http://fonts.googleapis.com/css?family=Dosis:400,700,500|Nunito:300,400,600' />
+	<!-- Mobile specific meta -->
+	<meta name=viewport content="width=device-width, initial-scale=1">
+	<meta name="format-detection" content="telephone-no">
+
+	<!-- CSS files -->
+	<link rel="stylesheet" href="/css/plugins.css">
+	<link rel="stylesheet" href="/css/style.css">
+	<style>
+		#table-example {
+			width: 100% !important;
+		}
+		li a:hover {
+			color: #dd003f;
+			background-color: #4280bf;
+		}
+	</style>
+</head>
+<body>
+<!--preloading-->
+<div id="preloader">
+    <img class="logo" src="/images/logo1.png" alt="" width="119" height="58">
+    <div id="status">
+        <span></span>
+        <span></span>
+    </div>
+</div>
+<!--end of preloading-->
+<!--login form popup-->
+<div class="login-wrapper" id="login-content">
+    <div class="login-content">
+        <a href="#" class="close">x</a>
+        <h3>Login</h3>
+        <form method="post" action="login.php">
+        	<div class="row">
+        		 <label for="username">
+                    Username:
+                    <input type="text" name="username" id="username" placeholder="Hugh Jackman" pattern="^[a-zA-Z][a-zA-Z0-9-_\.]{8,20}$" required="required" />
+                </label>
+        	</div>
+
+            <div class="row">
+            	<label for="password">
+                    Password:
+                    <input type="password" name="password" id="password" placeholder="******" pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$" required="required" />
+                </label>
+            </div>
+            <div class="row">
+            	<div class="remember">
+					<div>
+						<input type="checkbox" name="remember" value="Remember me"><span>Remember me</span>
+					</div>
+            		<a href="#">Forget password ?</a>
+            	</div>
+            </div>
+           <div class="row">
+           	 <button type="submit">Login</button>
+           </div>
+        </form>
+        <div class="row">
+        	<p>Or via social</p>
+            <div class="social-btn-2">
+            	<a class="fb" href="#"><i class="ion-social-facebook"></i>Facebook</a>
+            	<a class="tw" href="#"><i class="ion-social-twitter"></i>twitter</a>
+            </div>
+        </div>
+    </div>
+</div>
+<!--end of login form popup-->
+<!--signup form popup-->
+<div class="login-wrapper"  id="signup-content">
+    <div class="login-content">
+        <a href="#" class="close">x</a>
+        <h3>sign up</h3>
+        <form method="post" action="signup.php">
+            <div class="row">
+                 <label for="username-2">
+                    Username:
+                    <input type="text" name="username" id="username-2" placeholder="Hugh Jackman" pattern="^[a-zA-Z][a-zA-Z0-9-_\.]{8,20}$" required="required" />
+                </label>
+            </div>
+
+            <div class="row">
+                <label for="email-2">
+                    your email:
+                    <input type="password" name="email" id="email-2" placeholder="" pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$" required="required" />
+                </label>
+            </div>
+             <div class="row">
+                <label for="password-2">
+                    Password:
+                    <input type="password" name="password" id="password-2" placeholder="" pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$" required="required" />
+                </label>
+            </div>
+             <div class="row">
+                <label for="repassword-2">
+                    re-type Password:
+                    <input type="password" name="password" id="repassword-2" placeholder="" pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$" required="required" />
+                </label>
+            </div>
+           <div class="row">
+             <button type="submit">sign up</button>
+           </div>
+        </form>
+    </div>
+</div>
+<!--end of signup form popup-->
+
+<!-- BEGIN | Header -->
+<header class="ht-header">
+	<div class="container">
+		<nav class="navbar navbar-default navbar-custom">
+			<!-- Brand and toggle get grouped for better mobile display -->
+			<div class="navbar-header logo">
+				<div class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+					<span class="sr-only">Toggle navigation</span>
+					<div id="nav-icon1">
+						<span></span>
+						<span></span>
+						<span></span>
+					</div>
+				</div>
+				<a href="/"><img class="logo" src="images/logo1.png" alt="" width="119" height="58"></a>
+			</div>
+			<!-- Collect the nav links, forms, and other content for toggling -->
+			<div class="collapse navbar-collapse flex-parent" id="bs-example-navbar-collapse-1">
+				<ul class="nav navbar-nav flex-child-menu menu-left">
+					<li class="hidden">
+						<a href="#page-top"></a>
+					</li>
+					<li class="dropdown first">
+						<a href="/" class="btn btn-default">
+							主页
+						</a>
+					</li>
+					<li class="dropdown first">
+						<a href="/movieList" class="btn btn-default">
+							电影
+						</a>
+					</li>
+					<li class="dropdown first">
+						<a href="/bookList" class="btn btn-default">
+							书籍
+						</a>
+					</li>
+					<li class="dropdown first">
+						<a href="/groupList" class="btn btn-default">
+							小组
+						</a>
+					</li>
+					<li class="dropdown first">
+						<a href="/topicList" class="btn btn-default">
+							话题
+						</a>
+					</li>
+				</ul>
+				<ul class="nav navbar-nav flex-child-menu menu-right">
+					<li class="loginLink"><a href="/logout">登出</a></li>
+					<li class="btn signupLink" th:style="${currentUser!=null}?'display:none'" ><a href="/login">登录</a></li>
+					<div class="user-img" th:style="${currentUser==null}?'display:none'">
+						<img class="round_icon" th:src="${currentUser!=null and currentUser.image!=null}?'/file/image/'+${currentUser.image}:'/images/uploads/user-img.png'" >
+					</div>
+					<li><a href="/userProfile" th:text="${currentUser!=null}?${currentUser.name}"></a></li>
+				</ul>
+			</div>
+			<!-- /.navbar-collapse -->
+		</nav>
+
+		<!-- top search form -->
+		<form action="/search" method="post">
+			<div class="top-search">
+
+				<select name="type">
+					<option value="movie">电影</option>
+					<option value="book">书籍</option>
+				</select>
+				<input name="name" type="text" placeholder="输入关键词">
+			</div>
+		</form>
+	</div>
+</header>
+<!-- END | Header -->
+
+    	<div class="buster-light">
+<div class="hero mv-single-hero">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<!-- <h1> movie listing - list</h1>
+				<ul class="breadcumb">
+					<li class="active"><a href="#">Home</a></li>
+					<li> <span class="ion-ios-arrow-right"></span> movie listing</li>
+				</ul> -->
+			</div>
+		</div>
+	</div>
+</div>
+<div class="page-single movie-single movie_single">
+	<div class="container">
+		<div class="row ipad-width2">
+			<div class="col-md-4 col-sm-12 col-xs-12">
+				<div class="movie-img sticky-sb">
+					<img src="/images/uploads/movie-single.jpg" alt="" th:src="'/file/image/'+${currentMovie.image}">
+				</div>
+			</div>
+			<div class="col-md-8 col-sm-12 col-xs-12">
+				<div class="movie-single-ct main-content">
+					<h1 th:text="${currentMovie.name}" class="bd-hd">这里等着从服务端获取和上映时间</h1>
+					<div class="movie-rate">
+						<div class="rate">
+							<i class="ion-android-star"></i>
+							<p><span th:text="${currentMovie.rate}/10">8.1</span> /10<br>
+								<span class="rv" th:text="${currentMovie.rateNumber}+' Reviews'">56 Reviews</span>
+							</p>
+						</div>
+						<div class="rate-star">
+							<p></p>
+							<i class="ion-ios-star-outline" th:class="${currentMovie.rate>=10}?'ion-ios-star':'ion-ios-star-outline'"></i>
+							<i class="ion-ios-star-outline" th:class="${currentMovie.rate>=20}?'ion-ios-star':'ion-ios-star-outline'"></i>
+							<i class="ion-ios-star-outline" th:class="${currentMovie.rate>=30}?'ion-ios-star':'ion-ios-star-outline'"></i>
+							<i class="ion-ios-star-outline" th:class="${currentMovie.rate>=40}?'ion-ios-star':'ion-ios-star-outline'"></i>
+							<i class="ion-ios-star-outline" th:class="${currentMovie.rate>=50}?'ion-ios-star':'ion-ios-star-outline'"></i>
+							<i class="ion-ios-star-outline" th:class="${currentMovie.rate>=60}?'ion-ios-star':'ion-ios-star-outline'"></i>
+							<i class="ion-ios-star-outline" th:class="${currentMovie.rate>=70}?'ion-ios-star':'ion-ios-star-outline'"></i>
+							<i class="ion-ios-star-outline" th:class="${currentMovie.rate>=80}?'ion-ios-star':'ion-ios-star-outline'"></i>
+							<i class="ion-ios-star-outline" th:class="${currentMovie.rate>=90}?'ion-ios-star':'ion-ios-star-outline'"></i>
+							<i class="ion-ios-star-outline" th:class="${currentMovie.rate>=100}?'ion-ios-star':'ion-ios-star-outline'"></i>
+						</div>
+					</div>
+					<div class="movie-tabs" style="margin-top: 150px">
+						<div class="tabs">
+							<ul class="tab-links tabs-mv">
+								<li class="active"><a href="#overview">简介</a></li>
+								<li><a href="#reviews">影评</a></li>
+							</ul>
+
+						    <div class="tab-content">
+								<!-- 简介 -->
+						        <div id="overview" class="tab active">
+						            <div class="row">
+						            	<div class="col-md-8 col-sm-12 col-xs-12">
+											<p th:text="${currentMovie.overview}" style="font-size: 17px"></p>
+										</div>
+						            	<div class="col-md-4 col-xs-12 col-sm-12">
+						            		<div class="sb-it">
+						            			<h6>Director: </h6>
+						            			<p><a href="#" th:text="${currentMovie.director}">服务端电影导演</a></p>
+						            		</div>
+						            		<div class="sb-it">
+						            			<h6>Actor: </h6>
+						            			<p><a href="#" th:text="${currentMovie.actor}">服务端编剧</a></p>
+						            		</div>
+						            		<div class="sb-it">
+						            			<h6>Movie Type</h6>
+						            			<p><a href="#" th:text="${currentMovie.movietype}">服务端影星1~5个</a></p>
+						            		</div>
+<!--						            		<div class="sb-it">-->
+<!--						            			<h6>Genres:</h6>-->
+<!--						            			<p><a href="#">服务端分类</a></p>-->
+<!--						            		</div>-->
+<!--						            		<div class="sb-it">-->
+<!--						            			<h6>Release Date:</h6>-->
+<!--						            			<p>服务端具体发布时间</p>-->
+<!--						            		</div>-->
+<!--						            		<div class="sb-it">-->
+<!--						            			<h6>Run Time:</h6>-->
+<!--						            			<p>服务端电影时长</p>-->
+<!--						            		</div>-->
+<!--						            		<div class="sb-it">-->
+<!--						            			<h6>MMPA Rating:</h6>-->
+<!--						            			<p>服务端电影分级</p>-->
+<!--						            		</div>-->
+						            	</div>
+						            </div>
+						        </div>
+						        <div id="reviews" class="tab review">
+						           <div class="row">
+						            	<div class="rv-hd">
+						            		<div class="div">
+						       	 				<h2>Movie Review</h2>
+							            	</div>
+							            	<a href="#" class="redbtn reviewLink" >写影评</a>
+						            	</div>
+									   <button id="sort_by_time_btn" style="background-color: #f5f5f5;  border: 0px; color: #37A">时间排序</button>
+									   <button id="sort_by_pingjia_btn" style="background-color: #f5f5f5;  border: 0px; color: #37A">点赞排序</button>
+									   	<div class="col-lg-12" style="padding: 40px">
+										   <table class="table table-striped" id="table-example">
+											   <thead>
+											   <tr>
+												   <th class="text-center" style="display: none">Ranking</th>
+											   </tr>
+											   </thead>
+											   <!-- 按时间排序 start -->
+											   <tbody id="tbody_1">
+											   <tr th:each="i:${movieReviewListOrderByTime}" class="sort_by_time">
+												   <td>
+													   <div class="mv-user-review-item" style="border-bottom: 0px">
+														   <div class="user-infor">
+															   <img class="round_icon" th:src="'/user/image/'+${i.uid}" alt="">
+															   <div>
+																   <h3 th:text="${i.title}">Title</h3>
+																   <div class="no-star">
+																	   <i th:class="${i.rate>=1}?'ion-ios-star':'ion-ios-star-outline'"></i>
+																	   <i th:class="${i.rate>=2}?'ion-ios-star':'ion-ios-star-outline'"></i>
+																	   <i th:class="${i.rate>=3}?'ion-ios-star':'ion-ios-star-outline'"></i>
+																	   <i th:class="${i.rate>=4}?'ion-ios-star':'ion-ios-star-outline'"></i>
+																	   <i th:class="${i.rate>=5}?'ion-ios-star':'ion-ios-star-outline'"></i>
+																	   <i th:class="${i.rate>=6}?'ion-ios-star':'ion-ios-star-outline'"></i>
+																	   <i th:class="${i.rate>=7}?'ion-ios-star':'ion-ios-star-outline'"></i>
+																	   <i th:class="${i.rate>=8}?'ion-ios-star':'ion-ios-star-outline'"></i>
+																	   <i th:class="${i.rate>=9}?'ion-ios-star':'ion-ios-star-outline'"></i>
+																	   <i th:class="${i.rate>=10}?'ion-ios-star':'ion-ios-star-outline'"></i>
+																   </div>
+																   <p class="time" th:text="${#dates.format(i.time, 'yyyy/MMM/dd HH:mm')}">
+																   </p>
+
+															   </div>
+															   <div>
+																   <input th:style="'display: none'" type="text" class="dz_id" th:value="${i.rid}">
+																   <!-- 点赞数 -->
+																   <span class="dz_num" th:text="${i.like}"></span>
+																   <!-- 点赞button -->
+																   <button th:value="${i.rid}" th:text="${i.ifLike==0}?'点赞':'取消'" style="background-color: #fae9da; color: #ca6445; border: 0px;" class="dz_btn">点赞</button>
+															   </div>
+														   </div>
+														   <!--评论内容-->
+														   <div>
+															   <pre th:text="${i.content}" style="border: 0px; border-radius: 0px;"></pre>
+														   </div>
+													   </div>
+												   </td>
+											   </tr>
+											   </tbody> <!-- 按时间排序 over -->
+
+											   <!-- 按评价数量排序 start -->
+											   <tbody id="tbody_2" style="display: none">
+											   <tr th:each="i:${movieReviewListOrderByLike}" class="sort_by_like">
+												   <td>
+													   <div class="mv-user-review-item" style="border-bottom: 0px">
+														   <div class="user-infor">
+															   <img class="round_icon" th:src="'/user/image/'+${i.uid}" alt="">
+															   <div>
+																   <h3 th:text="${i.title}">Title</h3>
+																   <div class="no-star">
+																	   <i th:class="${i.rate>=1}?'ion-ios-star':'ion-ios-star-outline'"></i>
+																	   <i th:class="${i.rate>=2}?'ion-ios-star':'ion-ios-star-outline'"></i>
+																	   <i th:class="${i.rate>=3}?'ion-ios-star':'ion-ios-star-outline'"></i>
+																	   <i th:class="${i.rate>=4}?'ion-ios-star':'ion-ios-star-outline'"></i>
+																	   <i th:class="${i.rate>=5}?'ion-ios-star':'ion-ios-star-outline'"></i>
+																	   <i th:class="${i.rate>=6}?'ion-ios-star':'ion-ios-star-outline'"></i>
+																	   <i th:class="${i.rate>=7}?'ion-ios-star':'ion-ios-star-outline'"></i>
+																	   <i th:class="${i.rate>=8}?'ion-ios-star':'ion-ios-star-outline'"></i>
+																	   <i th:class="${i.rate>=9}?'ion-ios-star':'ion-ios-star-outline'"></i>
+																	   <i th:class="${i.rate>=10}?'ion-ios-star':'ion-ios-star-outline'"></i>
+																   </div>
+																   <p class="time" th:text="${#dates.format(i.time, 'yyyy/MMM/dd HH:mm')}">
+																   </p>
+
+															   </div>
+															   <div>
+																   <input th:style="'display: none'" type="text" class="dz_id" th:value="${i.rid}">
+																   <!-- 点赞数 -->
+																   <span class="dz_num" th:text="${i.like}"></span>
+																   <!-- 点赞button -->
+																   <button th:value="${i.rid}" th:text="${i.ifLike==0}?'点赞':'取消'" style="background-color: #fae9da; color: #ca6445; border: 0px;" class="dz_btn">点赞</button>
+															   </div>
+														   </div>
+														   <!--评论内容-->
+														   <div>
+															   <pre th:text="${i.content}" style="border: 0px; border-radius: 0px;"></pre>
+														   </div>
+													   </div>
+												   </td>
+											   </tr>
+											   </tbody> <!-- 按评价数量排序 over-->
+										   </table> <!-- 分页over -->
+
+									   	</div>
+									   	<div>
+										</div>
+						            </div>
+						        </div>
+						        <div id="cast" class="tab">
+						        	<div class="row">
+						            	<h3>Cast & Crew of</h3>
+					       	 			<h2>Avengers: Age of Ultron</h2>
+										<!-- //== -->
+					       	 			<div class="title-hd-sm">
+											<h4>Directors & Credit Writers</h4>
+										</div>
+										<div class="mvcast-item">
+											<div class="cast-it">
+												<div class="cast-left">
+													<h4>JW</h4>
+													<a href="#">Joss Whedon</a>
+												</div>
+												<p>...  Director</p>
+											</div>
+										</div>
+										<!-- //== -->
+										<div class="title-hd-sm">
+											<h4>Directors & Credit Writers</h4>
+										</div>
+										<div class="mvcast-item">
+											<div class="cast-it">
+												<div class="cast-left">
+													<h4>SL</h4>
+													<a href="#">Stan Lee</a>
+												</div>
+												<p>...  (based on Marvel comics)</p>
+											</div>
+											<div class="cast-it">
+												<div class="cast-left">
+													<h4>JK</h4>
+													<a href="#">Jack Kirby</a>
+												</div>
+												<p>...  (based on Marvel comics)</p>
+											</div>
+											<div class="cast-it">
+												<div class="cast-left">
+													<h4>JS</h4>
+													<a href="#">Joe Simon</a>
+												</div>
+												<p>...  (character created by: Captain America)</p>
+											</div>
+											<div class="cast-it">
+												<div class="cast-left">
+													<h4>JS</h4>
+													<a href="#">Joe Simon</a>
+												</div>
+												<p>...  (character created by: Thanos)</p>
+											</div>
+											<div class="cast-it">
+												<div class="cast-left">
+													<h4>RT</h4>
+													<a href="#">Roy Thomas</a>
+												</div>
+												<p>...  (character created by: Ultron, Vision)</p>
+											</div>
+											<div class="cast-it">
+												<div class="cast-left">
+													<h4>JB</h4>
+													<a href="#">John Buscema</a>
+												</div>
+												<p>...  (character created by: Ultron, Vision)</p>
+											</div>
+										</div>
+										<!-- //== -->
+										<div class="title-hd-sm">
+											<h4>Cast</h4>
+										</div>
+										<div class="mvcast-item">
+											<div class="cast-it">
+												<div class="cast-left">
+													<img src="/images/uploads/cast1.jpg" alt="">
+													<a href="#">Robert Downey Jr.</a>
+												</div>
+												<p>...  Robert Downey Jr.</p>
+											</div>
+											<div class="cast-it">
+												<div class="cast-left">
+													<img src="/images/uploads/cast2.jpg" alt="">
+													<a href="#">Chris Hemsworth</a>
+												</div>
+												<p>...  Thor</p>
+											</div>
+											<div class="cast-it">
+												<div class="cast-left">
+													<img src="/images/uploads/cast3.jpg" alt="">
+													<a href="#">Mark Ruffalo</a>
+												</div>
+												<p>...  Bruce Banner/ Hulk</p>
+											</div>
+											<div class="cast-it">
+												<div class="cast-left">
+													<img src="/images/uploads/cast4.jpg" alt="">
+													<a href="#">Chris Evans</a>
+												</div>
+												<p>...  Steve Rogers/ Captain America</p>
+											</div>
+											<div class="cast-it">
+												<div class="cast-left">
+													<img src="/images/uploads/cast5.jpg" alt="">
+													<a href="#">Scarlett Johansson</a>
+												</div>
+												<p>...  Natasha Romanoff/ Black Widow</p>
+											</div>
+											<div class="cast-it">
+												<div class="cast-left">
+													<img src="/images/uploads/cast6.jpg" alt="">
+													<a href="#">Jeremy Renner</a>
+												</div>
+												<p>...  Clint Barton/ Hawkeye</p>
+											</div>
+											<div class="cast-it">
+												<div class="cast-left">
+													<img src="/images/uploads/cast7.jpg" alt="">
+													<a href="#">James Spader</a>
+												</div>
+												<p>...  Ultron</p>
+											</div>
+											<div class="cast-it">
+												<div class="cast-left">
+													<img src="/images/uploads/cast9.jpg" alt="">
+													<a href="#">Don Cheadle</a>
+												</div>
+												<p>...  James Rhodes/ War Machine</p>
+											</div>
+										</div>
+										<!-- //== -->
+										<div class="title-hd-sm">
+											<h4>Produced by</h4>
+										</div>
+										<div class="mvcast-item">
+											<div class="cast-it">
+												<div class="cast-left">
+													<h4>VA</h4>
+													<a href="#">Victoria Alonso</a>
+												</div>
+												<p>...  executive producer</p>
+											</div>
+											<div class="cast-it">
+												<div class="cast-left">
+													<h4>MB</h4>
+													<a href="#">Mitchel Bell</a>
+												</div>
+												<p>...  co-producer (as Mitch Bell)</p>
+											</div>
+											<div class="cast-it">
+												<div class="cast-left">
+													<h4>JC</h4>
+													<a href="#">Jamie Christopher</a>
+												</div>
+												<p>...  associate producer</p>
+											</div>
+											<div class="cast-it">
+												<div class="cast-left">
+													<h4>LD</h4>
+													<a href="#">Louis D’Esposito</a>
+												</div>
+												<p>...  executive producer</p>
+											</div>
+											<div class="cast-it">
+												<div class="cast-left">
+													<h4>JF</h4>
+													<a href="#">Jon Favreau</a>
+												</div>
+												<p>...  executive producer</p>
+											</div>
+											<div class="cast-it">
+												<div class="cast-left">
+													<h4>KF</h4>
+													<a href="#">Kevin Feige</a>
+												</div>
+												<p>...  producer</p>
+											</div>
+											<div class="cast-it">
+												<div class="cast-left">
+													<h4>AF</h4>
+													<a href="#">Alan Fine</a>
+												</div>
+												<p>...  executive producer</p>
+											</div>
+											<div class="cast-it">
+												<div class="cast-left">
+													<h4>JF</h4>
+													<a href="#">Jeffrey Ford</a>
+												</div>
+												<p>...  associate producer</p>
+											</div>
+										</div>
+						            </div>
+					       	 	</div>
+						    </div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+		</div>
+<!-- footer section-->
+<footer class="ht-footer">
+	<div class="ft-copyright">
+		<div class="ft-left">
+			<p>© 2019 SimpleReview. All Rights Designed by Yang.</p>
+		</div>
+		<div class="backtotop">
+			<p><a href="#" id="back-to-top">Back to top  <i class="ion-ios-arrow-thin-up"></i></a></p>
+		</div>
+	</div>
+</footer>
+<!-- end of footer section-->
+
+
+<div class="login-wrapper" id="reviewContent">
+	<form>
+		<div class="login-content" >
+			<a href="#" class="close">x</a>
+			<h2>影评</h2>
+            <br>
+            <p>给个评价吧:</p>
+			<div class="row">
+				<!-- 星型评分 -->
+				<div id="default" class="col-md-8"></div>
+				<!-- 显示评分数值 -->
+				<div id="hint" class="col-md-4"></div>
+            </div>
+			<br>
+			<div class="row">
+				<input type="text" id="review_Title" placeholder="标题">
+			</div>
+			<br>
+			<div class="row">
+				<div>
+					<!--   评价框   -->
+					<textarea class="form-control" rows="8" data-width="320" id="review_Content"></textarea>
+				</div>
+			</div>
+			<br>
+			<span id="wordnum_tip" style="display: none"></span>
+			<br>
+			<input th:style="'display: none'" type="text" id="reviewMid" th:value="${currentMovie.id}">
+			<div class="row">
+				<button type="submit" id="bt" >提交</button>
+			</div>
+		</div>
+	</form>
+</div>
+<script src="/assets/js/jquery.min.js"></script>
+<!--<script src="/js/jquery.js"></script>-->
+<script src="/js/bootstrap.min.js"></script>
+<!-- 分页表格 -->
+<script src="/js/jquery.dataTables.min.js"></script>
+<script src="/js/dataTables.bootstrap.js"></script>
+<!--星型评分-->
+<script src="/js/jquery.raty.js"></script>
+<script src="/js/plugins.js"></script>
+<script src="/js/plugins2.js"></script>
+<script src="/js/custom.js"></script>
+<script type="text/javascript">
+	var reviewLink = $(".reviewLink");
+	var reviewCt=$("#reviewContent")
+	var loginWrap = $(".login-wrapper");
+	var overlay = $(".overlay");
+	reviewLink.on('click', function(event){
+		event.preventDefault();
+		reviewCt.parents(overlay).addClass("openform");
+		$(document).on('click', function(e){
+			var target = $(e.target);
+			if ($(target).hasClass("overlay")){
+				$(target).find(reviewCt).each( function(){
+					$(this).removeClass("openform");
+				});
+				setTimeout( function(){
+					$(target).removeClass("openform");
+				}, 350);
+			}
+		});
+	});
+	var closebt = $(".close");
+	closebt.on('click', function(e){
+		e.preventDefault();
+		var overlay = $(".overlay");
+		overlay.removeClass("openform");
+	});
+</script>
+<script type="text/javascript">
+	$.fn.raty.defaults.path = '/images';
+	$(function(){
+		$("#default").raty({
+			half: true,
+			targetKeep : true,
+			target: '#hint',
+			click : function(score, evt) {
+				$("#grade").val(score);
+			}
+		});
+
+		$("#bt").click( function(event){
+			event.preventDefault();
+
+			var $len = $('#review_Content').val().length;
+			var $titlelen = $('#review_Title').val().length;
+			var $score = $('#default').raty('score');
+			if ($len < 25 || !$score || $titlelen === 0) {
+				if (!$score) {
+					$('#wordnum_tip').text("至少一星评价!!");
+				} else if ($titlelen === 0) {
+					$('#wordnum_tip').text("标题不能为空!!");
+				} else {
+					$('#wordnum_tip').text("评价字数不足25字!!");
+				}
+				$('#wordnum_tip').fadeIn();
+			} else {
+				var review={
+					rate:$("#default").raty('score') * 2,
+					title:$("#review_Title").val(),
+					content:$('#review_Content').val(),
+					mid:$("#reviewMid").val()
+				};
+				console.log(review);
+				$.ajax({
+					type : "post",
+					dataType : "json",
+					url: "/addMovieReview",
+					data : JSON.stringify(review),
+					contentType:"application/json",
+					success : function(data) {
+						if(data=="0"){
+							location.reload();
+						}else if(data=="1"){
+							alert("用户未登录");
+						}else{
+							alert(data);
+						}
+					}
+				});
+			}
+		});
+
+
+		// 点赞按钮
+		$('.dz_btn').click(function(event) {
+			var text = $(this).text();  // 获得点赞按钮此时的内容
+			// console.log(text);
+			var $div = $(this.closest('div'));
+			var $span = $($div.children('span'));  // 获得显示点赞数的span
+			// console.log($span.text());
+			var n = parseInt($span.text());
+
+			var $temp=$(this)
+			var send={
+				rid:$(this).val()
+			};
+			$.ajax({
+				type : "post",
+				dataType : "json",
+				url: "/likeMovie",
+				data : JSON.stringify(send),
+				contentType:"application/json",
+				success : function(data) {
+					if(data=="0"){
+						if (text == '点赞') {
+							$span.text(n + 1);
+							$temp.text('取消')
+						} else {
+							$span.text(n -1);
+							$temp.text('点赞')
+						}
+					}else if(data=="1"){
+						alert("用户未登录");
+					}else{
+						alert(data);
+					}
+				}
+			});
+		});
+
+		// 分页表格
+		$('#table-example').dataTable({
+			"bSort" : false, //是否启动各个字段的排序功能
+			"ordering": false,
+		});
+
+		// 按时间和按数量排序
+		$('#sort_by_pingjia_btn').click(function () {
+			$('#tbody_1').hide();
+			$('#tbody_2').show();
+		});
+
+		$('#sort_by_time_btn').click(function () {
+			$('#tbody_2').hide();
+			$('#tbody_1').show();
+		});
+	});
+</script>
+</body>
+</html>

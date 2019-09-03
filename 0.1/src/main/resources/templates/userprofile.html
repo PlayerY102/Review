@@ -1,0 +1,708 @@
+﻿<!DOCTYPE html>
+<!--[if IE 7]>
+<html class="ie ie7 no-js" lang="en-US">
+<![endif]-->
+<!--[if IE 8]>
+<html class="ie ie8 no-js" lang="en-US">
+<![endif]-->
+<!--[if !(IE 7) | !(IE 8)  ]><!-->
+<html lang="en" class="no-js" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<!-- Basic need -->
+	<title>Open Pediatrics</title>
+	<meta charset="UTF-8">
+	<meta name="description" content="">
+	<meta name="keywords" content="">
+	<meta name="author" content="">
+	<link rel="profile" href="#">
+
+    <!--Google Font-->
+    <link rel="stylesheet" href='http://fonts.googleapis.com/css?family=Dosis:400,700,500|Nunito:300,400,600' />
+	<!-- Mobile specific meta -->
+	<meta name=viewport content="width=device-width, initial-scale=1">
+	<meta name="format-detection" content="telephone-no">
+
+	<!-- CSS files -->
+	<link rel="stylesheet" href="css/plugins.css">
+	<link rel="stylesheet" href="css/style.css">
+
+	<!-- 分页格式修改 -->
+	<style>
+		#table-example, #table-example2,  #table-example_favorite_book, #table-example_rated_book, #table-example_apply_group, #table-example_joined_group{
+			width: 100% !important;
+		}
+		li a:hover {
+			color: #dd003f;
+			background-color: #4280bf;
+		}
+	</style>
+</head>
+<body>
+<!--preloading-->
+<div id="preloader">
+    <img class="logo" src="images/logo1.png" alt="" width="119" height="58">
+    <div id="status">
+        <span></span>
+        <span></span>
+    </div>
+</div>
+<!--end of preloading-->
+<!--login form popup-->
+<div class="login-wrapper" id="changeImage-content">
+	<div class="login-content">
+		<a href="#" class="close">x</a>
+		<h3>更换头像</h3>
+		<form id="coords" class="coords"  action="/changeUserImage" method="post" enctype="multipart/form-data">
+			<div class="row">
+				<div class="form-group">
+					<div>
+						<input type="hidden"  id="x" name="x" />
+						<input type="hidden"  id="y" name="y" />
+						<input type="hidden"  id="w" name="w" />
+						<input type="hidden"  id="h" name="h" />
+						<input type="hidden"  id="pimg" name="pimg" />
+						<div class="fileinput fileinput-new" data-provides="fileinput">
+									<span class="btn btn-inverse btn-file">
+										<span class="fileinput-new"><i class="fa fa-picture-o"></i> Select image upload</span><span class="fileinput-exists"><i class="fa fa-refresh"></i> Change</span>
+										<input id="uploadImage" type="file" accept="image/jpeg" name="image" />
+									</span>
+						</div><!-- //fileinput-->
+					</div>
+				</div><!-- //form-group-->
+				<div class="form-group">
+					<img id="uploadPreview" style="display:none; width:100%;"/>
+				</div><!-- //form-group-->
+			</div><!-- //row-->
+			<div class="row">
+				<button type="submit" class="btn btn-danger btn-crop-upload disabled pull-right" style="display:none">提交</button>
+			</div>
+		</form>
+	</div>
+</div>
+<!--end of login form popup-->
+
+
+<!-- BEGIN | Header -->
+<header class="ht-header">
+	<div class="container">
+		<nav class="navbar navbar-default navbar-custom">
+			<!-- Brand and toggle get grouped for better mobile display -->
+			<div class="navbar-header logo">
+				<div class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+					<span class="sr-only">Toggle navigation</span>
+					<div id="nav-icon1">
+						<span></span>
+						<span></span>
+						<span></span>
+					</div>
+				</div>
+				<a href="/"><img class="logo" src="images/logo1.png" alt="" width="119" height="58"></a>
+			</div>
+			<!-- Collect the nav links, forms, and other content for toggling -->
+			<div class="collapse navbar-collapse flex-parent" id="bs-example-navbar-collapse-1">
+				<ul class="nav navbar-nav flex-child-menu menu-left">
+					<li class="hidden">
+						<a href="#page-top"></a>
+					</li>
+					<li class="dropdown first">
+						<a href="/" class="btn btn-default">
+							主页
+						</a>
+					</li>
+					<li class="dropdown first">
+						<a href="/movieList" class="btn btn-default">
+							电影
+						</a>
+					</li>
+					<li class="dropdown first">
+						<a href="/bookList" class="btn btn-default">
+							书籍
+						</a>
+					</li>
+					<li class="dropdown first">
+						<a href="/groupList" class="btn btn-default">
+							小组
+						</a>
+					</li>
+					<li class="dropdown first">
+						<a href="/topicList" class="btn btn-default">
+							话题
+						</a>
+					</li>
+				</ul>
+				<ul class="nav navbar-nav flex-child-menu menu-right">
+					<li class="loginLink"><a href="/logout">登出</a></li>
+					<li class="btn signupLink" th:style="${currentUser!=null}?'display:none'" ><a href="/login">登录</a></li>
+					<div class="user-img" th:style="${currentUser==null}?'display:none'">
+						<img class="round_icon" th:src="${currentUser!=null and currentUser.image!=null}?'/file/image/'+${currentUser.image}:'/images/uploads/user-img.png'" >
+					</div>
+					<li><a href="/userProfile" th:text="${currentUser!=null}?${currentUser.name}"></a></li>
+				</ul>
+			</div>
+			<!-- /.navbar-collapse -->
+		</nav>
+
+		<!-- top search form -->
+		<form action="/search" method="post">
+			<div class="top-search">
+
+				<select name="type">
+					<option value="movie">电影</option>
+					<option value="book">书籍</option>
+				</select>
+				<input name="name" type="text" placeholder="输入关键词">
+			</div>
+		</form>
+	</div>
+</header>
+<!-- END | Header -->
+
+<div class="hero user-hero">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="hero-ct">
+					<h1 th:text="${currentUser.name} + ' 的个人中心'">Edward kennedy’s profile</h1>
+					<ul class="breadcumb">
+						<li class="active"><a href="#">主页</a></li>
+						<li> <span class="ion-ios-arrow-right"><span id="head_route">个人中心</span></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="buster-light">
+
+
+<div class="page-single">
+	<div class="container">
+		<div class="row ipad-width2">
+			<div class="col-md-3 col-sm-12 col-xs-12">
+				<div class="user-information">
+					<div class="user-img">
+						<a>
+							<img class="round_icon_big" th:src="${currentUser!=null and currentUser.image!=null}?'/file/image/'+${currentUser.image}:'/images/uploads/user-img.png'" >
+						</a>
+						<a href="#" class="redbtn" id="changeImage">更换头像</a>
+					</div>
+					<div class="user-fav">
+						<p th:text="${currentUser!=null}?${currentUser.getName()}">Account Details</p>
+						<ul>
+							<li><a id="favorite_movie_btn">点赞过的影评</a></li>
+							<li class="active"><a id="rated_movie_btn">历史影评</a></li>
+							<li><a id="favorite_book_btn">点赞过的书评</a></li>
+							<li><a id="rated_book_btn">历史书评</a></li>
+							<li><a id="joined_group_btn">加入的小组</a></li>
+							<li><a id="apply_group_btn">小组申请</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+
+			<!-- favorite movie start -->
+			<div class="col-md-9 col-sm-12 col-xs-12" id="favorite_movie" style="display: none">
+				<h3>点赞的电影评论:</h3>
+				<br>
+				<table class="table table-striped" id="table-example2">
+					<thead>
+					<tr>
+						<th class="text-center" style="display: none">Ranking</th>
+					</tr>
+					</thead>
+					<tbody>
+					<tr th:each="i:${likeReviewList}">
+						<td>
+							<div class="movie-item-style-2 userrate" style="padding: 40px; border-bottom: 0px">
+								<img th:src="'/file/image/'+${i.image}" src="images/uploads/mv1.jpg" alt="">
+								<div class="mv-item-infor">
+									<h6><a th:href="'/movie/'+${i.mid}" th:text="${i.movieName}"></a></h6>
+									<p class="time sm-text">评分:</p>
+									<p class="rate"><i class="ion-android-star"></i><span th:text="${i.rate}"></span> /10</p>
+									<p class="time sm-text">影评:</p>
+									<br>
+									<h6 th:text="${i.title}">Title</h6>
+									<p class="time sm" th:text="${i.time}"></p>
+									<p th:text="${i.content}"></p>
+								</div>
+							</div>
+						</td>
+					</tr>
+					</tbody>
+				</table>
+			</div> <!-- favorite movie over-->
+
+			<!-- reated movie start -->
+			<div class="col-md-9 col-sm-12 col-xs-12" id="rated_movie">
+				<h3>历史电影评论:</h3>
+				<br>
+				<table class="table table-striped" id="table-example">
+					<thead>
+					<tr>
+						<th class="text-center" style="display: none">排序</th>
+					</tr>
+					</thead>
+					<tbody>
+					<tr th:each="i:${userReviewList}">
+						<td>
+							<div class="movie-item-style-2 userrate" style="padding: 40px; border-bottom: 0px">
+								<img th:src="'/file/image/'+${i.image}" src="images/uploads/mv1.jpg" alt="">
+								<div class="mv-item-infor">
+									<h6><a th:href="'/movie/'+${i.mid}" th:text="${i.movieName}">oblivion</a></h6>
+									<p class="time sm-text">你的评分:</p>
+									<p class="rate"><i class="ion-android-star"></i><span th:text="${i.rate}"></span> /10</p>
+									<p class="time sm-text">影评:</p>
+									<br>
+									<h6 th:text="${i.title}">Title</h6>
+									<p class="time sm" th:text="${i.time}"></p>
+									<p th:text="${i.content}"></p>
+								</div>
+							</div>
+						</td>
+					</tr>
+					</tbody>
+				</table>
+			</div>   <!-- rated movie over-->
+
+			<!-- favorite book start -->
+			<div class="col-md-9 col-sm-12 col-xs-12" id="favorite_book" style="display: none">
+				<h3>点赞的图书评论:</h3>
+				<br>
+				<table class="table table-striped" id="table-example_favorite_book">
+					<thead>
+					<tr>
+						<th class="text-center" style="display: none">Ranking</th>
+					</tr>
+					</thead>
+					<tbody>
+					<tr th:each="i:${likeReviewListBook}">
+						<td>
+							<div class="movie-item-style-2 userrate" style="padding: 40px; border-bottom: 0px">
+								<img th:src="'/file/image/'+${i.image}" src="images/uploads/mv1.jpg" alt="">
+								<div class="mv-item-infor">
+									<h6><a th:href="'/movie/'+${i.bid}" th:text="${i.bookName}"></a></h6>
+									<p class="time sm-text">评分:</p>
+									<p class="rate"><i class="ion-android-star"></i><span th:text="${i.rate}"></span> /10</p>
+									<p class="time sm-text">影评:</p>
+									<br>
+									<h6 th:text="${i.title}">Title</h6>
+									<p class="time sm" th:text="${i.time}"></p>
+									<p th:text="${i.content}"></p>
+								</div>
+							</div>
+						</td>
+					</tr>
+					</tbody>
+				</table>
+			</div> <!-- favorite book over-->
+
+			<!-- reated book start -->
+			<div class="col-md-9 col-sm-12 col-xs-12" id="rated_book" style="display: none">
+				<h3>历史的图书评论:</h3>
+				<br>
+				<table class="table table-striped" id="table-example_rated_book">
+					<thead>
+					<tr>
+						<th class="text-center" style="display: none">排序</th>
+					</tr>
+					</thead>
+					<tbody>
+					<tr th:each="i:${userReviewListBook}">
+						<td>
+							<div class="movie-item-style-2 userrate" style="padding: 40px; border-bottom: 0px">
+								<img th:src="'/file/image/'+${i.image}" src="images/uploads/mv1.jpg" alt="">
+								<div class="mv-item-infor">
+									<h6><a th:href="'/movie/'+${i.bid}" th:text="${i.bookName}"></a></h6>
+									<p class="time sm-text">你的评分:</p>
+									<p class="rate"><i class="ion-android-star"></i><span th:text="${i.rate}"></span> /10</p>
+									<p class="time sm-text">影评:</p>
+									<br>
+									<h6 th:text="${i.title}">Title</h6>
+									<p class="time sm" th:text="${i.time}"></p>
+									<p th:text="${i.content}"></p>
+								</div>
+							</div>
+						</td>
+					</tr>
+					</tbody>
+				</table>
+			</div>   <!-- rated book over-->
+
+			<!-- group joined start -->
+			<div class="col-md-9 col-sm-12 col-xs-12" id="joined_group" style="display: none">
+				<h3>加入的小组:</h3>
+				<br>
+				<table class="table table-striped" id="table-example_joined_group">
+					<thead>
+					<tr>
+						<th class="text-center" style="display: none">Ranking</th>
+					</tr>
+					</thead>
+					<tbody>
+					<tr th:each="i:${groupList}">
+						<td>
+							<div class="movie-item-style-2 userrate" style="padding: 40px; border-bottom: 0px">
+								<img th:src="'/file/image/'+${i.image}" src="images/uploads/mv1.jpg" alt="">
+								<div class="mv-item-infor">
+									<h6><a th:href="'/group/'+${i.id}" th:text="${i.name}"></a></h6>
+									<p class="time sm-text">帖子数量</p>
+									<p class="rate"><span th:text="${i.rateNumber}"></span></p>
+									<p class="time sm-text">简介</p>
+									<br>
+									<p th:text="${i.overview}"></p>
+								</div>
+							</div>
+						</td>
+					</tr>
+					</tbody>
+				</table>
+			</div> <!-- group joined over-->
+
+			<!-- group apply start -->
+			<div class="col-md-9 col-sm-12 col-xs-12" id="apply_group" style="display: none">
+				<h3>小组申请:</h3>
+				<br>
+				<table class="table table-striped" id="table-example_apply_group">
+					<thead>
+					<tr>
+						<th class="text-center" style="display: none">排序</th>
+					</tr>
+					</thead>
+					<tbody>
+					<tr th:each="i:${groupApplyList}">
+						<td>
+							<div class="movie-item-style-2 userrate" style="padding: 40px; border-bottom: 0px">
+								<img th:src="'/user/image/'+${i.uid}"  alt="">
+								<div class="mv-item-infor">
+									<h5 th:text="${i.userName}"></h5>
+									<p class="time sm-text">小组名称: </p>
+									<h6><a th:href="'/group/'+${i.gid}" th:text="${i.groupName}"></a></h6>
+									<p class="time sm-text">申请时间</p>
+									<p class="time sm" th:text="${i.time}"></p>
+									<br>
+									<button class="agree_btn" style="background-color:#268dcd; color: #fff; border-radius:2px">同意</button>
+									<button class="refuse_btn" style="background-color:#268dcd; color: #fff; border-radius:2px;">拒绝</button>
+									<input type="text" th:value="${i.aid}" style="display: none">
+								</div>
+							</div>
+						</td>
+					</tr>
+					</tbody>
+				</table>
+			</div>   <!-- group apply over-->
+
+		</div>
+	</div>
+</div>
+</div>
+
+<!-- footer section-->
+<footer class="ht-footer">
+	<div class="ft-copyright">
+		<div class="ft-left">
+			<p>© 2019 SimpleReview. All Rights Designed by Yang.</p>
+		</div>
+		<div class="backtotop">
+			<p><a href="#" id="back-to-top">Back to top  <i class="ion-ios-arrow-thin-up"></i></a></p>
+		</div>
+	</div>
+</footer>
+<!-- end of footer section-->
+<!--<script src="js/jquery.js"></script>-->
+<script src="/assets/js/jquery.min.js"></script>
+<!--<script src="/js/jquery.js"></script>-->
+<script src="/js/bootstrap.min.js"></script>
+<!-- 分页表格 -->
+<script src="/js/jquery.dataTables.min.js"></script>
+<script src="/js/dataTables.bootstrap.js"></script>
+
+<script type="text/javascript">
+	$(document).ready(function() {
+		var newJcrop;
+		$('.btn-crop-enable').click(function(e) {
+			$('#crop_image').Jcrop({ aspectRatio:4/3 },function(){
+				newJcrop = this;
+				newJcrop.animateTo([150,100,360,300]);
+			});
+			$('.crop_tools').fadeIn();
+			$(this).hide();
+		});
+		$('.btn-crop-disable').click(function(e) {
+			newJcrop.destroy();
+			$('.btn-crop-enable').fadeIn();
+			$('.crop_tools').hide();
+		});
+
+
+		$('.md-crop-load').on('click', function(){
+			$('body').modalmanager('loading');
+			setTimeout(function(){
+				setTimeout(function(){
+					$('#crop_image_modal').Jcrop();
+				}, 400);
+				$("#md-crop").modal();
+			}, 500);
+		});
+
+
+		var uploadPreview = $("#uploadPreview");
+		var jcrop_api , pic_width , pic_height;
+		$("#uploadImage").change(function(){
+			if(typeof  jcrop_api != 'undefined'){ jcrop_api.destroy(); }
+			if($(this).val()){
+				$(".btn-crop-upload").fadeIn();
+			}else{
+				$(".btn-crop-upload").fadeOut();
+			}
+			var oFReader = new FileReader();
+			oFReader.readAsDataURL(document.getElementById("uploadImage").files[0]);
+			oFReader.onload = function (oFREvent) {
+				uploadPreview.attr('src', oFREvent.target.result).show();
+				$("#pimg").val(oFREvent.target.result);
+				var img = new Image();
+				img.onload = function() {
+					pic_width=this.width;
+					pic_height=this.height;
+				}
+				img.src = oFREvent.target.result;
+			};
+			setTimeout(function () {
+				uploadPreview.Jcrop({
+					bgOpacity: .5, aspectRatio:1/1,
+					trueSize: [pic_width,pic_height] ,
+					onChange:   showCoords,
+					onSelect:   showCoords,
+					onRelease:  clearCoords
+				},function(){
+					jcrop_api = this;
+				});
+				$('#coords').on('change','input',function(e){
+					var x1 = $('#x').val(),  y1 = $('#y').val();
+				});
+			}, 400);
+		});
+		$('.btn-crop-upload').on('click', function(){
+			$(this).closest("form").submit();
+		});
+		function showCoords(c){
+			$('#x').val(c.x); $('#y').val(c.y);
+			$('#w').val(c.w); $('#h').val(c.h);
+			$('.btn-crop-upload').removeClass('disabled');
+		};
+		function clearCoords() {
+			$('#coords input').val('');
+			$('.btn-crop-upload').addClass('disabled');
+		};
+
+		// rated movie 分页
+		$('#table-example').dataTable({
+			"bSort" : false, //是否启动各个字段的排序功能
+			"ordering": false,
+		});
+
+		// favorite_movie 分页
+		$('#table-example2').dataTable({
+			"bSort" : false, //是否启动各个字段的排序功能
+			"ordering": false,
+		});
+		// rated movie 分页
+		$('#table-example_favorite_book').dataTable({
+			"bSort" : false, //是否启动各个字段的排序功能
+			"ordering": false,
+		});
+
+		// favorite_movie 分页
+		$('#table-example_rated_book').dataTable({
+			"bSort" : false, //是否启动各个字段的排序功能
+			"ordering": false,
+		});
+
+		// joined_group 分页
+		$('#table-example_joined_group').dataTable({
+			"bSort" : false, //是否启动各个字段的排序功能
+			"ordering": false,
+		});
+
+		// apply_group 分页
+		$('#table-example_apply_group').dataTable({
+			"bSort" : false, //是否启动各个字段的排序功能
+			"ordering": false,
+		});
+
+
+		// favorite_movie页面和rated_movie页面切换
+		$('#favorite_movie_btn').click(function () {
+			var $par = $($(this).parent());
+			$par.addClass("active");
+			$par.siblings('.active').removeClass("active");
+
+			$('#head_route').text("FAVORITE MOVIES");
+
+
+			$('#rated_movie').hide();
+			$('#favorite_movie').show();
+			$('#rated_book').hide();
+			$('#favorite_book').hide();
+			$('#joined_group').hide();
+			$('#apply_group').hide();
+		});
+
+		$('#rated_movie_btn').click(function () {
+			var $par = $($(this).parent());
+			$par.addClass("active");
+			$par.siblings('.active').removeClass("active");
+			$('#head_route').text("RATED MOVIES");
+
+
+			$('#rated_movie').show();
+			$('#favorite_movie').hide();
+			$('#rated_book').hide();
+			$('#favorite_book').hide();
+			$('#joined_group').hide();
+			$('#apply_group').hide();
+		});
+
+		$('#favorite_book_btn').click(function () {
+			var $par = $($(this).parent());
+			$par.addClass("active");
+			$par.siblings('.active').removeClass("active");
+
+			$('#head_route').text("FAVORITE BOOKS");
+
+			$('#rated_movie').hide();
+			$('#favorite_movie').hide();
+			$('#rated_book').hide();
+			$('#favorite_book').show();
+			$('#joined_group').hide();
+			$('#apply_group').hide();
+		});
+
+		$('#rated_book_btn').click(function () {
+			var $par = $($(this).parent());
+			$par.addClass("active");
+			$par.siblings('.active').removeClass("active");
+			$('#head_route').text("RATED BOOKS");
+
+			$('#rated_movie').hide();
+			$('#favorite_movie').hide();
+			$('#rated_book').show();
+			$('#favorite_book').hide();
+			$('#joined_group').hide();
+			$('#apply_group').hide();
+		});
+
+		$('#apply_group_btn').click(function () {
+			var $par = $($(this).parent());
+			$par.addClass("active");
+			$par.siblings('.active').removeClass("active");
+			$('#head_route').text("RATED BOOKS");
+
+			$('#rated_movie').hide();
+			$('#favorite_movie').hide();
+			$('#rated_book').hide();
+			$('#favorite_book').hide();
+			$('#joined_group').hide();
+			$('#apply_group').show();
+		});
+
+		$('#joined_group_btn').click(function () {
+			var $par = $($(this).parent());
+			$par.addClass("active");
+			$par.siblings('.active').removeClass("active");
+			$('#head_route').text("RATED BOOKS");
+
+			$('#rated_movie').hide();
+			$('#favorite_movie').hide();
+			$('#rated_book').hide();
+			$('#favorite_book').hide();
+			$('#joined_group').show();
+			$('#apply_group').hide();
+		});
+
+
+		// 同意申请
+		$('.agree_btn').click(function(event) {
+			var $input = $($(this).siblings("input"));
+			var $tr = $($(this).parents('tr'));
+
+			var send={
+				rid:$input.val()
+			};
+			$.ajax({
+				type : "post",
+				dataType : "json",
+				url: "/acceptGroupApply",
+				data : JSON.stringify(send),
+				contentType:"application/json",
+				success : function(data) {
+					if(data=="0"){
+						// alert("成功");
+						$tr.remove();
+					}else{
+						alert(data);
+					}
+				}
+			});
+		});
+		// 拒绝申请
+		$('.refuse_btn').click(function() {
+			var $input = $($(this).siblings("input"));
+			var $tr = $($(this).parents('tr'));
+
+			var send={
+				rid:$input.val()
+			};
+			$.ajax({
+				type : "post",
+				dataType : "json",
+				url: "/deleteGroupApply",
+				data : JSON.stringify(send),
+				contentType:"application/json",
+				success : function(data) {
+					if(data=="0"){
+						$tr.remove();
+					}else{
+						alert(data);
+					}
+				}
+			});
+		});
+	});
+
+
+</script>
+
+<script src="js/plugins.js"></script>
+<script src="js/plugins2.js"></script>
+<script src="js/custom.js"></script>
+<script type="text/javascript">
+	var changeImageLink = $("#changeImage");
+	var changeImageCt=$("#changeImage-content");
+	var loginWrap = $(".login-wrapper");
+	var overlay = $(".overlay");
+	changeImageLink.on('click', function(event){
+		event.preventDefault();
+		changeImageCt.parents(overlay).addClass("openform");
+		$(document).on('click', function(e){
+			var target = $(e.target);
+			if ($(target).hasClass("overlay")){
+				$(target).find(changeImageCt).each( function(){
+					$(this).removeClass("openform");
+				});
+				setTimeout( function(){
+					$(target).removeClass("openform");
+				}, 350);
+			}
+		});
+	});
+	var closebt = $(".close");
+	closebt.on('click', function(e){
+		e.preventDefault();
+		var overlay = $(".overlay");
+		overlay.removeClass("openform");
+	});
+
+
+</script>
+</body>
+</html>

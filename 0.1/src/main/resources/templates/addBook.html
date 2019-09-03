@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!-- Meta information -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+    <!-- Title-->
+    <title>Admin Page</title>
+    <!-- Favicons -->
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="assets/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="assets/ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="assets/ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="assets/ico/apple-touch-icon-57-precomposed.png">
+    <link rel="shortcut icon" href="assets/ico/favicon.ico">
+    <!-- CSS Stylesheet-->
+    <link type="text/css" rel="stylesheet" href="assets/css/bootstrap/bootstrap.min.css"/>
+    <link type="text/css" rel="stylesheet" href="assets/css/bootstrap/bootstrap-themes.css"/>
+    <link type="text/css" rel="stylesheet" href="assets/css/style.css"/>
+</head>
+<body class="leftMenu nav-collapse">
+<div id="wrapper">
+    <!--
+    /////////////////////////////////////////////////////////////////////////
+    //////////     HEADER  CONTENT     ///////////////
+    //////////////////////////////////////////////////////////////////////
+    -->
+    <div id="header">
+
+        <div class="logo-area clearfix">
+            <a href="/admin" class="logo"></a>
+        </div>
+        <!-- //logo-area-->
+
+        <div class="tools-bar">
+            <ul class="nav navbar-nav nav-main-xs">
+                <li><a href="#" class="icon-toolsbar nav-mini"><i class="fa fa-bars"></i></a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right tooltip-area">
+                <li><a href="#" class="avatar-header">
+                    <img alt="" src="assets/img/avatar.png" class="circle">
+                </a>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown">
+                        <em><strong>Hi</strong>,  <strong th:text="${currentAdmin}"></strong> </em> <i class="dropdown-icon fa fa-angle-down"></i>
+                    </a>
+                    <ul class="dropdown-menu pull-right icon-right arrow">
+                        <li><a href="#"><i class="fa fa-user"></i> Profile</a></li>
+                        <li><a href="#"><i class="fa fa-cog"></i> Setting </a></li>
+                        <li class="divider"></li>
+                        <li><a href="/adminLogout"><i class="fa fa-sign-out"></i>登出</a></li>
+                    </ul>
+                    <!-- //dropdown-menu-->
+                </li>
+            </ul>
+        </div>
+        <!-- //tools-bar-->
+
+    </div>
+    <!-- //header-->
+
+    <!--
+    /////////////////////////////////////////////////////////////////////////
+    //////////     MAIN SHOW CONTENT     //////////
+    //////////////////////////////////////////////////////////////////////
+    -->
+    <div id="main">
+
+        <ol class="breadcrumb">
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Form</a></li>
+            <li class="active">Form Wizard</li>
+        </ol>
+        <!-- //breadcrumb-->
+
+        <div id="content">
+
+            <div class="row">
+                <!-- 图书上传 -->
+                <div class="col-lg-12">
+                    <h1><strong>图书上传</strong></h1>
+                    <label class="color" style="background-color:#edece5"> </label>
+                    <form id="validate-wizard" class="wizard-step" action="/addBook" method="post"
+                          enctype="multipart/form-data">
+                        <ul>
+                            <li><a href="#step1" data-toggle="tab">1</a></li>
+                            <li><a href="#step2" data-toggle="tab">2</a></li>
+                            <li><a href="#step3" data-toggle="tab">3</a></li>
+                            <li><a href="#step4" data-toggle="tab">4</a></li>
+                        </ul>
+                        <div class="progress progress-stripes progress-sm" style="margin:0">
+                            <div class="progress-bar" data-color="theme"></div>
+                        </div>
+                        <div class="tab-content">
+                            <!-- step1 start -->
+                            <div class="tab-pane fade" id="step1" parsley-validate parsley-bind>
+                                <h3>图书上传</h3><br>
+                                <div class="form-group">
+                                    <label class="control-label">图书名字：</label>
+                                    <input type="text" name="name" class="form-control" parsley-required="true"
+                                           placeholder="请输入书名">
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label">出版时间</label>
+                                    <div>
+                                        <div class="row">
+                                            <div class="input-group date form_datetime col-lg-6"
+                                                 data-picker-position="top-left" data-date-format="dd MM yyyy">
+                                                <input type="text" name="time" class="form-control">
+                                                <span class="input-group-btn">
+                                                    <button class="btn btn-default" type="button">
+                                                        <i class="fa fa-times"></i>
+                                                    </button>
+                                                    <button class="btn btn-default" type="button">
+                                                        <i class="fa fa-calendar"></i>
+                                                    </button>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>  <!-- step1 over -->
+
+                            <!-- step2 start -->
+                            <div class="tab-pane fade" id="step2" parsley-validate parsley-bind>
+                                <h3>图书详情</h3><br>
+                                <div class="form-group">
+                                    <label class="control-label">作者</label>
+                                    <input type="text" name="author" class="form-control" parsley-required="true"
+                                           placeholder="请输入作者姓名">
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label">出版社</label>
+                                    <input type="text" name="press" class="form-control" placeholder="请输入出版社名称">
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label">价格</label>
+                                    <input type="text" name="price" class="form-control" placeholder="请输入图书价格">
+                                </div>
+                            </div> <!-- step2 over-->
+
+                            <!-- step3 start -->
+                            <div class="tab-pane fade" id="step3">
+                                <h3>书籍简介</h3><br>
+                                <div class="form-group">
+                                    <label class="control-label">简介：</label>
+                                    <textarea name="overview" class="form-control" rows="3"
+                                              placeholder="请输入书籍简介"></textarea>
+                                </div>
+                            </div> <!-- step3 over-->
+
+                            <!-- step4 start -->
+                            <div class="tab-pane fade" id="step4">
+                                <h3>图书封面</h3><br>
+                                <div class="form-group">
+                                </div>
+                                <div class="form-group">
+                                    <div>
+                                        <input type="hidden" id="x" name="x"/>
+                                        <input type="hidden" id="y" name="y"/>
+                                        <input type="hidden" id="w" name="w"/>
+                                        <input type="hidden" id="h" name="h"/>
+                                        <input type="hidden" id="pimg" name="pimg"/>
+                                        <button type="button" class="btn btn-danger btn-crop-upload disabled pull-right"
+                                                style="display:none">Upload
+                                        </button>
+                                        <div class="fileinput fileinput-new" data-provides="fileinput">
+										    <span class="btn btn-inverse btn-file">
+                                                <span class="fileinput-new">
+                                                    <i class="fa fa-picture-o"></i> Select image upload</span>
+                                                <span class="fileinput-exists">
+                                                    <i class="fa fa-refresh"></i> Change</span>
+                                                <input id="uploadImage" type="file" accept="image/jpeg" name="image"/>
+											</span>
+                                        </div><!-- //fileinput-->
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <img id="uploadPreview" style="display:none; width:100%;"/>
+                                </div>
+
+                            </div>  <!-- step4 over-->
+                            <hr>
+
+                            <footer class="row">
+                                <div class="col-sm-4">
+                                    <section class="wizard">
+                                        <button type="button" class="btn btn-inverse previous">
+                                            <i class="fa fa-angle-left"></i> Previous
+                                        </button>
+                                        <button type="button" class="btn btn-theme next">
+                                            Next <i class="fa fa-angle-right"></i>
+                                        </button>
+                                    </section>
+                                </div>
+                                <div class="col-sm-8 align-lg-right">
+                                    <div class="wizard-status">Wizard step : <span></span></div>
+                                </div>
+                            </footer>
+                        </div>
+                    </form>
+                </div>
+                <!-- 图书上传结束 -->
+            </div>  <!-- //content > row-->
+
+        </div>
+        <!-- //content-->
+
+    </div>
+    <!-- //main-->
+
+    <!--
+    //////////////////////////////////////////////////////////////
+    //////////     LEFT NAV MENU     //////////
+    ///////////////////////////////////////////////////////////
+    -->
+    <nav id="menu" data-search="close">
+        <ul>
+            <li><span><a href="#"><i class="icon  fa fa-laptop"></i> Dashboard</a></span>
+            </li>
+            <li><span><i class="icon  fa fa-rocket"></i>Movie</span>
+                <ul>
+                    <li><a href="/addMovie"><i class="icon  fa fa-rocket"></i>添加电影</a></li>
+                    <li><a href="#"><i class="icon  fa fa-th"></i>TODO</a></li>
+                </ul>
+            </li>
+            <li><span><i class="icon  fa fa-file-text"></i>Book</span>
+                <ul>
+                    <li><a href="/addBook"><i class="icon  fa fa-rocket"></i>添加图书</a></li>
+                    <li><a href="#"><i class="icon  fa fa-th"></i>TODO</a></li>
+                </ul>
+            </li>
+            <li><span><i class="icon  fa fa-clipboard"></i>Topic</span>
+                <ul>
+                    <li><a href="/addTopic"><i class="icon  fa fa-rocket"></i>添加话题</a></li>
+                    <li><a href="#"><i class="icon  fa fa-th"></i>TODO</a></li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
+    <!-- //nav left menu-->
+</div>
+<!-- //wrapper-->
+
+
+<!--
+////////////////////////////////////////////////////////////////////////
+//////////     JAVASCRIPT  LIBRARY     //////////
+/////////////////////////////////////////////////////////////////////
+-->
+<!-- Jquery Library -->
+<script type="text/javascript" src="assets/js/jquery.min.js"></script>
+<script type="text/javascript" src="assets/js/jquery.ui.min.js"></script>
+<script type="text/javascript" src="assets/plugins/bootstrap/bootstrap.min.js"></script>
+<!-- Modernizr Library For HTML5 And CSS3 -->
+<script type="text/javascript" src="assets/js/modernizr/modernizr.js"></script>
+<script type="text/javascript" src="assets/plugins/mmenu/jquery.mmenu.js"></script>
+<script type="text/javascript" src="assets/js/styleswitch.js"></script>
+<!-- Library 10+ Form plugins-->
+<script type="text/javascript" src="assets/plugins/form/form.js"></script>
+<!-- Datetime plugins -->
+<script type="text/javascript" src="assets/plugins/datetime/datetime.js"></script>
+<!-- Library Chart-->
+<script type="text/javascript" src="assets/plugins/chart/chart.js"></script>
+<!-- Library  5+ plugins for bootstrap -->
+<script type="text/javascript" src="assets/plugins/pluginsForBS/pluginsForBS.js"></script>
+<!-- Library 10+ miscellaneous plugins -->
+<script type="text/javascript" src="assets/plugins/miscellaneous/miscellaneous.js"></script>
+<!-- Library Themes Customize-->
+<script type="text/javascript" src="assets/js/caplet.custom.js"></script>
+<script>
+    $(document).ready(function () {
+        $('#rootwizard').bootstrapWizard({
+            tabClass: "nav-wizard",
+            onTabShow: function (tab, navigation, index) {
+                tab.prevAll().addClass('completed');
+                tab.nextAll().removeClass('completed');
+                if (tab.hasClass("active")) {
+                    tab.removeClass('completed');
+                }
+                var $total = navigation.find('li').length;
+                var $current = index + 1;
+                var $percent = ($current / $total) * 100;
+                $('#rootwizard').find('.progress-bar').css({width: $percent + '%'});
+                $('#rootwizard').find('.wizard-status span').html($current + " / " + $total);
+            }
+        });
+
+        $('#validate-wizard').bootstrapWizard({
+            tabClass: "nav-wizard",
+            onNext: function (tab, navigation, index) {
+                var content = $('#step' + index);
+                if (typeof content.attr("parsley-validate") != 'undefined') {
+                    var $valid = content.parsley('validate');
+                    if (!$valid) {
+                        return false;
+                    }
+                }
+                ;
+                // Set the name for the next tab
+                $('#step4 h3').find("span").html($('#fullname').val());
+            },
+            onTabClick: function (tab, navigation, index) {
+                $.notific8('Please click <strong>next button</strong> to wizard next step!! ', {
+                    life: 5000,
+                    theme: "danger",
+                    heading: " Wizard Tip :); "
+                });
+                return false;
+            },
+            onTabShow: function (tab, navigation, index) {
+                tab.prevAll().addClass('completed');
+                tab.nextAll().removeClass('completed');
+                if (tab.hasClass("active")) {
+                    tab.removeClass('completed');
+                }
+                var $total = navigation.find('li').length;
+                var $current = index + 1;
+                var $percent = ($current / $total) * 100;
+                $('#validate-wizard').find('.progress-bar').css({width: $percent + '%'});
+                $('#validate-wizard').find('.wizard-status span').html($current + " / " + $total);
+            }
+        });
+
+    });
+    $(document).ready(function () {
+        var newJcrop;
+        $('.btn-crop-enable').click(function (e) {
+            $('#crop_image').Jcrop({aspectRatio: 4 / 3}, function () {
+                newJcrop = this;
+                newJcrop.animateTo([150, 100, 360, 300]);
+            });
+            $('.crop_tools').fadeIn();
+            $(this).hide();
+        });
+        $('.btn-crop-disable').click(function (e) {
+            newJcrop.destroy();
+            $('.btn-crop-enable').fadeIn();
+            $('.crop_tools').hide();
+        });
+
+
+        $('.md-crop-load').on('click', function () {
+            $('body').modalmanager('loading');
+            setTimeout(function () {
+                setTimeout(function () {
+                    $('#crop_image_modal').Jcrop();
+                }, 400);
+                $("#md-crop").modal();
+            }, 500);
+        });
+
+
+        var uploadPreview = $("#uploadPreview");
+        var jcrop_api, pic_width, pic_height;
+        $("#uploadImage").change(function () {
+            if (typeof jcrop_api != 'undefined') {
+                jcrop_api.destroy();
+            }
+            if ($(this).val()) {
+                $(".btn-crop-upload").fadeIn();
+            } else {
+                $(".btn-crop-upload").fadeOut();
+            }
+            var oFReader = new FileReader();
+            oFReader.readAsDataURL(document.getElementById("uploadImage").files[0]);
+            oFReader.onload = function (oFREvent) {
+                uploadPreview.attr('src', oFREvent.target.result).show();
+                $("#pimg").val(oFREvent.target.result);
+                var img = new Image();
+                img.onload = function () {
+                    pic_width = this.width;
+                    pic_height = this.height;
+                }
+                img.src = oFREvent.target.result;
+            };
+            setTimeout(function () {
+                uploadPreview.Jcrop({
+                    bgOpacity: .5, aspectRatio: 1 / 1,
+                    trueSize: [pic_width, pic_height],
+                    onChange: showCoords,
+                    onSelect: showCoords,
+                    onRelease: clearCoords
+                }, function () {
+                    jcrop_api = this;
+                });
+                $('#coords').on('change', 'input', function (e) {
+                    var x1 = $('#x').val(), y1 = $('#y').val();
+                });
+            }, 400);
+        });
+        $('.btn-crop-upload').on('click', function () {
+            $(this).closest("form").submit();
+        });
+
+        function showCoords(c) {
+            $('#x').val(c.x);
+            $('#y').val(c.y);
+            $('#w').val(c.w);
+            $('#h').val(c.h);
+            $('.btn-crop-upload').removeClass('disabled');
+        };
+
+        function clearCoords() {
+            $('#coords input').val('');
+            $('.btn-crop-upload').addClass('disabled');
+        };
+
+    });
+</script>
+</body>
+</html>

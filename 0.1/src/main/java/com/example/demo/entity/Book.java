@@ -1,0 +1,117 @@
+package com.example.demo.entity;
+
+import org.springframework.data.annotation.Id;
+
+import java.util.Date;
+
+public class Book {
+    @Id
+    private String id;
+
+    private String name;
+    private Integer rate;
+    private Integer rateNumber;
+    private String image;
+    private Date time;
+    private String overview;
+
+    // add by xqy
+    private String price;
+    private String author;
+    private String press;
+
+    public Book() {
+        name="";
+        rate=60;
+        rateNumber=0;
+        image="";
+        time=new Date();
+        overview="";
+
+        // add by xqy
+        price="0.0";
+        author="";
+        press="";
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Integer getRate() {
+        return rate;
+    }
+
+    public void setRate(Integer rate) {
+        this.rate = rate;
+    }
+
+    public Integer getRateNumber() {
+        return rateNumber;
+    }
+
+    public void setRateNumber(Integer rateNumber) {
+        this.rateNumber = rateNumber;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    public Date getTime() {
+        return time;
+    }
+
+    public void setTime(Date time) {
+        this.time = time;
+    }
+
+    public String getOverview() {
+        return overview;
+    }
+
+    public void setOverview(String overview) {
+        this.overview = overview;
+    }
+
+    // add by xqy
+    public String getPrice() {
+        return price;
+    }
+
+    public void setPrice(String price) {
+        this.price = price;
+    }
+
+    public String getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
+    }
+
+    public String getPress() {
+        return press;
+    }
+
+    public void setPress(String press) {
+        this.press = press;
+    }
+}
